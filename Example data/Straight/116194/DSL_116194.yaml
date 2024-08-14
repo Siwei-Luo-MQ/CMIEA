@@ -1,0 +1,17 @@
+Scenario:
+  Enviorment:
+    Weather: Sunny
+    Time: daytime
+  Road_network:
+    Road_feature: Straight
+    No_ways: 2
+    No_lanes: 4
+    Length: 35
+    Width: 3
+  Actors:
+    Ego_vehicle:
+      Type: Car
+      Trajectory: [(5,1.5), (25,2.5)]
+    NPC_actor_1:
+      type: Car
+      Trajectory: [(30,2.5), (25,2.5)]
