@@ -1,0 +1,37 @@
+Prompt 1:
+
+I need you to work as an assistant on this task.
+
+I have a dataset about car crashes, each crash contains a crash summary. The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information.
+
+Now, I need you to extract the environmental information from the crash summary. To be specific, I need you to extract the weather and time from the crash summary. I have three rules for your answer:
+
+1. Your answers for weather must be selected from these eight values: Sunny; Cloudy; Overcast; Rainy; Snowy; Foggy; Windy; Clear
+
+2. Your answers for time must be selected from these two values: daytime; nighttime. 
+
+3. If you can't find any description of the weather or the time, you need to output 'not mentioned'.
+
+I will first show you one example to help you better understand this task.
+
+Prompt 2:
+
+Crash summary: (see attached Summary.txt)
+
+Analysis process:
+
+Step 1 - Locate the description of weather and time from the summary.
+
+'It was daylight, snowing, and the bituminous road was icy.'
+
+Step 2 - Extract the weather and time from the description
+
+From the description we get in step 1, we can know that the word - 'snowing' is used for describing weather, and we can find the weather corresponding to 'snowing' from the weather answer list: Snowy
+
+From the description we get in step 1, we can know that the word - 'daylight' is used for describing time, and we can find the time corresponding to 'daylight' from the time answer list: daytime
+
+Answer:
+
+Weather: Snowy
+
+Time: Daytime
