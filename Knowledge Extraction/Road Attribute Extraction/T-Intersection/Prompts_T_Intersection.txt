@@ -1,0 +1,81 @@
+Prompt - 100271:
+
+I need you to work as an assistant.
+
+I have a sketch and a summary of a car crash. Crash sketches are in graph modality while crash summaries are text data. 
+In the sketches, road networks, traffic participants, trajectories, and additional crash background information are visualized. 
+The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information. 
+It is known that this car crash happened on an T-Intersection road. (When two roads meet and form a T shape, it's called a T-intersection.) We call the horizontal lane in a T-intersection the main road, and the longitudinal lane the branch road. Vehicles heading towards the main road from the branch road need to give way to vehicles on the main road and turn.
+
+You are required to extract the configuration details of this road network from the sketch and summary. To be more specific, you need to answer the following questions:
+1. How many ways are there in the main road? (your answer here should be an integer)
+2. How many lanes are there in the main road? (your answer here should be an integer)
+3. How many ways are there in the branch road? (your answer here should be an integer)
+4. How many lanes are there in the branch road? (your answer here should be an integer)
+5. What is the length of the main road? (The unit is meter, you don’t need to include ‘meter’ in your answer)
+6. What is the length of the branch road? (The unit is meter, you don’t need to include ‘meter’ in your answer)
+7. What's the width of a single lane? (The unit is meter, you don’t need to include ‘meter’ in your answer)
+
+To assist your calculation, here's some common knowledge you can use:
+length of a car: 5 meters
+width of a car: 2 meters
+length of a truck: 20 meters
+width of a truck: 2.5 meters
+
+I will show you an example to help you better understand this task.
+
+Prompt:
+
+Crash sketch: (see attached Sketch.jpg)
+
+Crash summary: (see attached Summary.txt)
+
+Analysis process:
+
+Step 1 - Extract the number of ways and lanes from crash sketch & summary
+
+From the sketch, we can see that vehicle V1 is driving from the branch road to the main road, while V2 is driving on the main road. Therefore, the description of the driving section of V1 in the crash summary should include the description of the branch road features, while the description of the driving section of V2 should include the description of the main road features.
+
+In the crash summary, the following statement describes V1:
+‘Vehicle one (V1 - case vehicle), a 2001 Chrysler Sebring, 4-door sedan was traveling east in the eastbound left-turn lane of a three-lane, two-way private road that connects a company parking lot with a state roadway (one eastbound right-turn lane, one eastbound left-turn lane, and one westbound lane) and was approaching a T-intersection.’
+From the above statement, we can know that the branch road is a three-lane, two-way private road, so for questions 3 and 4, our answers are:
+No_ways_branch_road = 2
+No_lanes_branch_road = 3
+
+In the crash summary, the following statement describes V2:
+‘Vehicle two (V2), a 1999 Chevrolet Blazer, 4-door utility vehicle was traveling south in the southbound through-lane of a three-lane, two-way road (one southbound right-turn lane, one southbound through-lane, and one northbound lane) and was approaching the same intersection as V1.’
+From the above statement, we know that the main road is a three-lane, two-way road, so for questions 1 and 2, our answers are:
+No_ways_main_road = 2
+No_lanes_main_road = 3
+
+
+Step 2 - Approximate the length of the road and the width of the lane from the sketch
+
+From the sketch, we know that the center of the T-Intersection is roughly located at the center of the sketch. The main road is the horizontal road in the figure, and the branch road is the longitudinal road in the figure.
+
+First, calculate the length of the main road:
+From the sketch, we know that V2 is driving on the main road, and the length of the main road is the length from the leftmost end to the rightmost end of the sketch. Knowing that the length of the car body is 5 meters, it can be seen from the figure that the length of the main road is about 9 car body lengths, so the length of the main road is:
+length_main_road = 5 x 9 = 45 meters
+
+Next, calculate the length of the branch road:
+From the sketch, we know that V1 is driving on the branch road, and the length of the branch road is the length from the top of the sketch to the center of the sketch. Knowing that the length of the car body is 5 meters, it can be seen from the figure that the length of the branch road is about 2 car body lengths, so the length of the main road is:
+length_branch_road = 5 x 2 = 10 meters
+
+Next, estimate the width of the road:
+From the sketch, we can see that the red car is driving in the middle of a lane, and both sides of the car are about half the width of the car's body away from the edge of the lane.
+Therefor we can calculate the width of the lane in this way:
+lane_width = 2 + 2/2 + 2/2 = 4 meters
+
+Finally, you need to format the output:
+
+No_ways_main_road = 2
+No_lanes_main_road = 3
+No_ways_branch_road = 2
+No_lanes_branch_road = 3
+length_main_road = 45
+length_branch_road = 10
+lane_width = 4
+
+
+
+

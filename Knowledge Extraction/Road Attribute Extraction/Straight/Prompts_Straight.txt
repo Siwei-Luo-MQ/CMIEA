@@ -31,6 +31,7 @@ Analysis process:
 
 Step 1 - Extract the number of ways and lanes from crash summary
 From the summary, we can know that the following sentences described the number of ways and lanes:
+
 'Vehicle one (V1 - case vehicle), a 1999 Ford Taurus, 4-door sedan was traveling east in the eastbound lane of a two-lane, two-way roadway.'
 From this sentence, we can know that the word - 'two-way' is used for describing the number of ways and the word - 'two-lane' is used for describing the number of lanes.
 Therefor, the answer for the first question (number of ways) is 2 and the answer for the second question (number of lanes) is 2.
