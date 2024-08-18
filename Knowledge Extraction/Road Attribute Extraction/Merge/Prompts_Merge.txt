@@ -1,0 +1,73 @@
+Prompt - 103341:
+
+I need you to work as an assistant.
+
+I have a sketch and a summary of a car crash. Crash sketches are in graph modality while crash summaries are text data. 
+In the sketches, road networks, traffic participants, trajectories, and additional crash background information are visualized. 
+The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information. 
+It is known that this car crash happened on a merge road. There are a main road and a branch road in the road network.
+
+You are required to extract the configuration details of this road network from the sketch and summary. To be more specific, you need to answer the following questions:
+1. How many ways are there in the main road? (your answer here should be an integer)
+2. How many lanes are there in the main road? (your answer here should be an integer)
+3. How many lanes are there in the branch road? (your answer here should be an integer)
+3. What's the length of the main road? (The unit is meter, you don’t need to include ‘meter’ in your answer)
+4. What's the width of a single lane? (The unit is meter, you don’t need to include ‘meter’ in your answer)
+5. What's the merge_angle of the road? (your answer should be 'small' or 'big')
+
+To assist your calculation, here's some common knowledge you can use:
+length of a car: 5 meters
+width of a car: 2 meters
+length of a truck: 20 meters
+width of a truck: 2.5 meters
+If the angle between the main road and the branch road is less than 45 degrees, the result of merge_angle is small, otherwise it is big.
+
+I will show you an example to help you better understand this task.
+
+Prompt:
+
+Crash sketch: (see attached Sketch.jpg)
+
+Crash summary: (see attached Summary.txt)
+
+Analysis process:
+
+Step 1 - Extract the number of ways and lanes from crash summary
+
+From the sketch, we can see that vehicle V1 is driving on the main road, while V2 is driving on the branch road and going to the mergance. Therefore, the description of the driving section of V1 in the crash summary should include the description of the main road features, while the description of the driving section of V2 should include the description of the branch road features.
+
+In the crash summary, the following statement describes V1:
+‘Vehicle one (V1 - case vehicle), a 2000 Pontiac Sunfire, 2-door coupe was traveling east in the right eastbound lane of a six-lane divided, limited access freeway (three eastbound travel lanes, protected median, three westbound lanes).’
+From the above statement, we know that the main road is a six-lane, divided road, so for questions 1 and 2, our answers are:
+No_ways_main_road = 2
+No_lanes_main_road = 6
+
+In the crash summary, the following statement describes V2:
+‘Vehicle two (V2), a 1999 Dodge Ram conversion van, was traveling east in the eastbound lane of an entrance ramp and was attempting to enter the same freeway that V1 was traveling on.’
+Unfortunately, there is no description of the number of branch roads in the above sentence, so we need to look at the sketch.
+From the sketch, we can see that there is an obvious dotted line (lane dividing line) on the branch road where V2 is located. Therefore, the answer is 2 for questions 3.
+
+Step 2 - Approximate the length of the main road and the width of the lane from the sketch
+From the sketch we can know the two ends of the main road are located on both sides of the sketch, so we need to calculate the distance from the leftmost end to the rightmost end in the sketch.
+The red rectangular block marked with V1 in the image is a car. From the sketch we can estimate that the straight-line distance between the two ends of this main road is approximately equal to 12 car body lengths.
+Therefor we can calculate the length of the road in this way:
+length_main_road = 5 x 12 = 60 meters
+
+From the sketch, we can see that the red car is driving in the middle of a lane, and both sides of the car are about half the width of the car's body away from the edge of the lane.
+Therefor we can calculate the width of the lane in this way:
+width_road = 2 + 2/2 + 2/2 = 4 meters
+
+Step 3 - Approximate the merge_angle
+From the sketch, we can see that the angle between the main road and the branch road is smaller than 45 degrees, so the answer for merge_angle is small.
+
+Finally, you need to format the output:
+
+No_ways_main_road = 2
+No_lanes_main_road = 6
+No_lanes_branch_road = 2
+length_main_road: 50
+width_road: 4
+merge_angle: small
+
+
+
