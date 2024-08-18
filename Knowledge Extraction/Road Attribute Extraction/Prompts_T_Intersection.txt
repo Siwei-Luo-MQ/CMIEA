@@ -1,11 +1,11 @@
-Prompt - 100237:
+Prompt - 100271:
 
 I need you to work as an assistant.
 
 I have a sketch and a summary of a car crash. Crash sketches are in graph modality while crash summaries are text data. 
 In the sketches, road networks, traffic participants, trajectories, and additional crash background information are visualized. 
 The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information. 
-It is known that this car crash happened on an Intersection road.
+It is known that this car crash happened on an T-Intersection road. (When two roads meet and form a T shape, it's called a T-intersection.)
 
 You are required to extract the configuration details of this road network from the sketch and summary. To be more specific, you need to answer the following questions:
 1. How many ways are there at most for roads bordering the intersection? (your answer here should be an integer)
