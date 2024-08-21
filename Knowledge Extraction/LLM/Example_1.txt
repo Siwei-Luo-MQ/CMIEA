@@ -1,0 +1,42 @@
+Inputs:
+crash sketch: (see sketch_example_1.jpg)
+
+crash summary: (see summary_example_1.txt)
+
+Road Network: 
+	Road Type: Straight
+	No_ways: 2
+	No_lanes: 4
+	Length: 50
+	Width: 4
+
+Analysis:
+
+From the provided Road Network information, we know this is a straight road with four lanes, two in each direction, with a total length of 50 meters and a lane width of 4 meters each.
+
+When constructing a Cartesian coordinate system for the straight road, we need to define the bottom-left corner of the road as the origin. The X-axis is set horizontally with the positive direction to the right, and the Y-axis is set vertically with the positive direction upwards.
+
+Based on the sketch, we know there are two vehicles involved in the accident. We will use the center position of each vehicle to obtain the trajectory information.
+
+Combining the sketch and the summary information, we know both vehicles started from the left side of the sketch but were in different lanes. V1 was traveling in the lane closer to the X-axis compared to V2.
+
+We can also infer that the two vehicles collided roughly in the middle of the road, with V1 moving into V2’s lane.
+
+Using this information, we can deduce the starting positions and collision points for both vehicles. We create a list for each vehicle to store the starting point and collision point, with the starting point first and the collision point second.
+
+V1_traj = [(4,2), (25,6)]
+V2_traj = [(10,6), (25,6)]
+
+Next, you need to use the trajectory prediction model you learned to predict the trajectories of both vehicles between their starting points and collision points. Each vehicle's trajectory should include three intermediate points.
+
+In this case, I will directly provide the answer for demonstration:
+
+V1_traj = [(4,2), (10,3), (15, 4), (20, 5), (25,6)]
+V2_traj = [(10,6), (13,6), (18,7), (21, 6), (25,6)]
+
+Then, you need to validate your predicted trajectories based on the descriptions of the vehicles’ trajectories in the summary to determine if your predictions are correct.
+
+Output:
+V1_traj = [(4,2), (10,3), (15, 4), (20, 5), (25,6)]
+V2_traj = [(10,6), (13,6), (18,7), (21, 6), (25,6)]
+Validation: Pass
