@@ -6,14 +6,12 @@ import pandas as pd
 import base64
 import re
 
-
 # Function to encode the image
 def encode_image(image_path):
   with open(image_path, "rb") as image_file:
     return base64.b64encode(image_file.read()).decode('utf-8')
 
-
-def road_type_extraction(sketch,summary,true_label,road_type_sketch,client):
+def road_type_extraction(sketch,summary,true_label,road_type_sketch,client,record,folder_path):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -35,6 +33,8 @@ def road_type_extraction(sketch,summary,true_label,road_type_sketch,client):
                                 "Crash sketches are in graph modality while crash summaries are text data. The sketches visualise road networks, traffic participants, trajectories, and additional crash background information. "
                                 "The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information.\n\n"
                                 "Now, I need you to extract the road networks from the dataset. Your answers must be within these five values: Intersection, T-intersection, Straight, Curve, and Merge. Also, you need to return the validation result.\n\n"
+                                "Your Output must in this structure: {'Road type': <your answer for the road type>, 'Validation': <your answer for the validation>'}\n"
+                                "Note: Your answer does not need to be enclosed in quotation marks\n\n"
                                 "I will first show you an example to help you understand this task."
                     }
                 ]
@@ -89,10 +89,16 @@ def road_type_extraction(sketch,summary,true_label,road_type_sketch,client):
     )
     first_output = response.choices[0].message.content
     print(first_output)
-    road_type = re.search(r"'Road type': ([\w-]+)", first_output).group(1)
-    validation = re.search(r"'Validation': (\w+)", first_output).group(1)
-    pre_result = 1 if true_label == road_type else 0
-    return road_type, validation, pre_result
+    # road_type = re.search(r"'Road type': ([\w-]+)", first_output).group(1)
+    # validation = re.search(r"'Validation': (\w+)", first_output).group(1)
+    # pre_result = 1 if true_label == road_type else 0
+
+    # save results
+    file_name = f"{record}_road_type.txt"
+    file_path = os.path.join(folder_path, file_name)
+    with open(file_path, 'w') as file:
+        file.write(first_output)
+    # return road_type, validation, pre_result
 
 
 def main():
@@ -101,17 +107,19 @@ def main():
     parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str, help='Path of road type label file')
     args=parser.parse_args()
 
-    # Get current time
-    now=datetime.now()
-
     # Get data ID list
     records = [name for name in os.listdir(args.data_path) if os.path.isdir(os.path.join(args.data_path, name))]
     # Get road type labels
     df = pd.read_excel(args.road_type_label)
     road_type_labels = dict(zip(df['ID'], df['Label']))
 
+    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    result_folder = f"experiment_{current_time}"
+    os.makedirs(result_folder, exist_ok=True)
+    folder_path = os.path.abspath(result_folder)
+
     client = OpenAI()
-    for record in records[3:]:
+    for record in records:
         record_id = int(record)
         record_path = args.data_path + '\\' + record
         # Get encoded crash sketch
@@ -124,13 +132,13 @@ def main():
         # Extract road type from Summary and Validate using sketch
         # Get training sketch
         road_type_sketch = encode_image('E:\GitHub\CMIEA\Prompt Engineering\\road_type\Sketch.jpg')
-        road_type, road_type_val, pre_result = road_type_extraction(sketch, summary, road_type_labels[record_id],road_type_sketch,client)
-        print(road_type, road_type_val, pre_result)
-
-
-
-
-
+        road_type_extraction(sketch,
+                             summary,
+                             road_type_labels[record_id],
+                             road_type_sketch,
+                             client,
+                             record,
+                             folder_path)
 
 
 if __name__=='__main__':
