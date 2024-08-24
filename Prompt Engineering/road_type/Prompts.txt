@@ -1,0 +1,32 @@
+Prompt 1:
+
+I need you to work as an assistant on this task.
+
+I have a multi-modality dataset about car crashes, each crash contains a crash sketch and a crash summary. Crash sketches are in graph modality while crash summaries are text data. In the sketches, road networks, traffic participants, trajectories, and additional crash background information are visualized. The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information.
+
+Now, I need you to extract the road networks from the dataset. Your answers must be within these six values: Intersection, T-intersection, Straight, Curve, Merge, and Roundabout. Also, you need to return the validation result.
+
+I will first show you one example to help you better understand this task.
+
+Prompt 2:
+
+Crash sketch: (see attached Sketch.jpg)
+
+Crash summary: (see attached Summary.txt)
+
+Analysis process:
+
+Step 1 - Crash Summary Analysis
+By analyzing the crash summary, we can know that:
+	V1 was traveling on a curved, two-lane, two-way road, and 
+	V2 was also traveling on this curved road.
+Therefore, based on the road feature description provided in the crash summary, we can initially conclude that this is a curved road.
+
+Step 2 - Validation 
+
+From the crash sketch, we can see that there are two curved roads depicted, with no intersections on the far left or right sides of the roads.
+Therefore, based on the information in the sketch, we can verify the answer obtained in the first step. 
+The answer obtained in the first step has passed the verification.
+
+Answer:
+Curve (Validation passed)
