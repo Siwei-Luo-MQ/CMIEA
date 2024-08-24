@@ -11,7 +11,7 @@ def encode_image(image_path):
   with open(image_path, "rb") as image_file:
     return base64.b64encode(image_file.read()).decode('utf-8')
 
-def road_type_extraction(sketch,summary,true_label,road_type_sketch,client,record,folder_path):
+def road_type_extraction(sketch,summary,road_type_sketch,client,record,folder_path):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -88,18 +88,27 @@ def road_type_extraction(sketch,summary,true_label,road_type_sketch,client,recor
         }
     )
     first_output = response.choices[0].message.content
-    print(first_output)
-    # road_type = re.search(r"'Road type': ([\w-]+)", first_output).group(1)
-    # validation = re.search(r"'Validation': (\w+)", first_output).group(1)
-    # pre_result = 1 if true_label == road_type else 0
 
     # save results
     file_name = f"{record}_road_type.txt"
     file_path = os.path.join(folder_path, file_name)
     with open(file_path, 'w') as file:
         file.write(first_output)
-    # return road_type, validation, pre_result
 
+def read_txt_results(folder_path,true_label):
+    results = {}
+    for filename in os.listdir(folder_path):
+        if filename.endswith("_road_type.txt"):
+            file_id = filename.split("_")[0]
+            file_path = os.path.join(folder_path, filename)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+            road_type = re.search(r"'Road type': ([\w-]+)", content).group(1)
+            validation = re.search(r"'Validation': (\w+)", content).group(1)
+            pre_result = 1 if true_label[int(file_id)] == road_type else 0
+
+            results[file_id] = [road_type,validation,pre_result]
+    return results
 
 def main():
     parser = argparse.ArgumentParser(description='MM ADS Testing - Information Extraction')
@@ -134,11 +143,29 @@ def main():
         road_type_sketch = encode_image('E:\GitHub\CMIEA\Prompt Engineering\\road_type\Sketch.jpg')
         road_type_extraction(sketch,
                              summary,
-                             road_type_labels[record_id],
                              road_type_sketch,
                              client,
                              record,
                              folder_path)
+
+    # Evaluate results
+    pre_results = read_txt_results(folder_path,road_type_labels)
+    print('Results from ChatGPT:')
+    print(pre_results)
+    total_records = len(pre_results)
+    correct_predictions = sum(1 for v in pre_results.values() if v[2] == 1)
+    accuracy = correct_predictions / total_records
+
+    pass_records = [v for v in pre_results.values() if v[1] == 'Pass']
+    correct_pass_predictions = sum(1 for v in pass_records if v[2] == 1)
+    validation_accuracy = correct_pass_predictions / len(pass_records) if pass_records else 0
+
+    pass_rate = len(pass_records) / total_records
+
+    print(f"Accuracy: {accuracy:.2f}")
+    print(f"Validation Accuracy: {validation_accuracy:.2f}")
+    print(f"Pass Rate: {pass_rate:.2f}")
+
 
 
 if __name__=='__main__':
