@@ -1,0 +1,29 @@
+Based on the provided crash sketch and summary, here are the extracted configuration details:
+
+1. **From the summary, V1 is traveling west in a two-lane, two-way roadway.** This means:
+   - No_ways_main_road = 2 (both directions)
+   - No_lanes_main_road = 2 (two lanes total)
+
+2. **Branch Road Information:**
+   - Since there is no mention of a distinct branch road in the summary and it's a two-lane road where all vehicles are on the same road, we can assume the following:
+   - No_ways_branch_road = 2 (same for both directions as it¡¯s a two-lane)
+   - No_lanes_branch_road = 2 (total lanes)
+
+3. **Estimating Lengths and Width:**
+   - For the main road:
+     - Observing from the sketch, the main road appears to be approximately 6 car lengths (using the car length of 5 meters).
+     - Length_main_road = 5 * 6 = 30 meters.
+
+   - For the branch road:
+     - The sketch suggests no additional branch roads are present; hence we can consider this as a shared road.
+     - Length_branch_road = 0 (not applicable).
+
+   - Width of a single lane:
+     - Based on similar calculations as in the previous example, I'll estimate the lane width. Typical lane widths are about 3 meters.
+     - Width = 3 meters.
+
+Combining these observations, the final output structure would be:
+
+```json
+{'No_ways_main_road': 2, 'No_lanes_main_road': 2, 'No_ways_branch_road': 2, 'No_lanes_branch_road': 2, 'Length_main': 30, 'Length_branch': 0, 'Width': 3}
+```

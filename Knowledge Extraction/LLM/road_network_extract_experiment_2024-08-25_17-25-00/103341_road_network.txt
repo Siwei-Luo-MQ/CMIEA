@@ -1,0 +1,14 @@
+Based on the provided sketch and summary, here are the extracted details:
+
+1. **Number of ways on the main road (No_ways_main_road)**: 2
+2. **Number of lanes on the main road (No_lanes_main_road)**: 6
+3. **Number of lanes on the branch road (No_lanes_branch_road)**: 2
+4. **Length of the main road (Length_main)**: 60 (approximate length based on the sketch)
+5. **Width of a single lane (Width)**: 4 (calculated based on the car's width)
+6. **Merge angle (Merge angle)**: 'small' (angle is less than 45 degrees)
+
+Putting this together, the output is:
+
+```
+{'No_ways_main_road': 2, 'No_lanes_main_road': 6, 'No_lanes_branch_road': 2, 'Length_main': 60, 'Width': 4, 'Merge angle': 'small'}
+```

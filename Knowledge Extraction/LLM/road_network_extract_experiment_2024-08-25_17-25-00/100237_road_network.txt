@@ -1,0 +1,22 @@
+Based on the provided sketch and summary, here are the extracted details:
+
+1. **Number of ways at most for roads bordering the intersection**: 
+   - For V1 (eastbound road), it's a two-lane, two-way road ¡ú 2 ways.
+   - For V2 (northbound road), it's also a two-lane, two-way road ¡ú 2 ways.
+   - Max ways = 2.
+
+2. **Number of lanes at most for roads bordering the intersection**:
+   - For V1 ¡ú 2 lanes.
+   - For V2 ¡ú 2 lanes.
+   - Max lanes = 2.
+
+3. **Longest distance from one end of the intersection to the other**:
+   - Horizontal road (for V1): Approximately 8 car lengths (5m each) ¡ú 8 * 5 = 40 meters.
+   - Longitudinal road (for V2): Approximately 7 car lengths ¡ú 7 * 5 = 35 meters.
+   - Longest distance = 40 meters.
+
+4. **Width of a single lane**: Default width is typically 4 meters.
+
+So the final output is:
+
+{'No_ways': 2, 'No_lanes': 2, 'Length': 40, 'Width': 4}

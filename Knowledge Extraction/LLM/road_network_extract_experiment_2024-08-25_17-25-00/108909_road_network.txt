@@ -1,0 +1,1 @@
+{'No_ways_main_road': 2, 'No_lanes_main_road': 6, 'No_lanes_branch_road': 1, 'Length_main': 60, 'Width': 4, 'Merge angle': 'small'}
