@@ -33,7 +33,7 @@ def road_type_extraction(sketch,summary,road_type_sketch,client,record,folder_pa
                                 "Crash sketches are in graph modality while crash summaries are text data. The sketches visualise road networks, traffic participants, trajectories, and additional crash background information. "
                                 "The crash summary is the text description of the crash, it contains road networks, traffic participants, trajectories, and environmental information.\n\n"
                                 "Now, I need you to extract the road networks from the dataset. Your answers must be within these five values: Intersection, T-intersection, Straight, Curve, and Merge. Also, you need to return the validation result.\n\n"
-                                "Your Output must in this structure: {'Road type': <your answer for the road type>, 'Validation': <your answer for the validation>'}\n"
+                                "Your Output must in this structure: {'Road type': <your answer for the road type>, 'Validation': <your answer for the validation>}\n"
                                 "Note: Your answer does not need to be enclosed in quotation marks\n\n"
                                 "I will first show you an example to help you understand this task."
                     }
@@ -111,7 +111,7 @@ def read_txt_results(folder_path,true_label):
     return results
 
 def main():
-    parser = argparse.ArgumentParser(description='MM ADS Testing - Information Extraction')
+    parser = argparse.ArgumentParser(description='MM ADS Testing - road type extraction')
     parser.add_argument('--data_path',default='E:\GitHub\CMIEA\Dataset',type=str,help='Path of MM crash dataset')
     parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str, help='Path of road type label file')
     args=parser.parse_args()
@@ -123,7 +123,7 @@ def main():
     road_type_labels = dict(zip(df['ID'], df['Label']))
 
     current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    result_folder = f"experiment_{current_time}"
+    result_folder = f"road_type_extract_experiment_{current_time}"
     os.makedirs(result_folder, exist_ok=True)
     folder_path = os.path.abspath(result_folder)
 
@@ -165,7 +165,13 @@ def main():
     print(f"Accuracy: {accuracy:.2f}")
     print(f"Validation Accuracy: {validation_accuracy:.2f}")
     print(f"Pass Rate: {pass_rate:.2f}")
-
+    # Save prediction results
+    df = pd.DataFrame({
+        'ID': list(pre_results.keys()),
+        'Label': [value[0] for value in pre_results.values()]
+    })
+    file_path = folder_path + '\\road_type_prediction.xlsx'
+    df.to_excel(file_path, index=False)
 
 
 if __name__=='__main__':
