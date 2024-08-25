@@ -1,0 +1,49 @@
+To process the provided sketch and summary, here's the analysis based on the defined steps:
+
+### 1. **Determine Road Type**:
+The road type is **Straight**.
+
+### 2. **Mapping**:
+- Confirm the road is horizontally aligned (as it appears to be in the sketch).
+- Map the bottom-left corner of the straight road to (0, 0).
+- Establish the X-axis as the horizontal direction (to the right) and the Y-axis as the vertical direction (upward).
+
+### 3. **Extract Starting and Collision Points**:
+From the sketch:
+- **V1** is traveling east in the eastbound lane, while **V2** is blocking the lane at an angle.
+- The collision occurs with V1 impacting the right side of V2, indicating a T-type collision configuration.
+
+### Proposed Points:
+- For **V1**:
+  - Starting point (based on position in the lane): (5, 2) (assuming it is near the left edge of the lane)
+  - Collision point (where V1 strikes V2): (15, 2) (a point near V2, blocking the lane)
+
+- For **V2**:
+  - Starting point (as it is stopped): (15, 4) (positioned in the lane at an angle)
+  - Collision point matches V1’s collision point: (15, 2)
+
+### 4. **Predict Trajectories**:
+Using estimations, we can predict the intermediate points for both vehicles:
+- **V1 Trajectory**: 
+  - Start: (5, 2)
+  - Intermediate: (8, 2.5), (11, 2.0), (13, 2.0)
+  - End: (15, 2)
+
+- **V2 Trajectory**: 
+  - Start: (15, 4)
+  - Intermediate: (15, 3), (15, 2.5), (15, 2)
+  - End: (15, 2)
+
+### 5. **Validation**:
+According to the crash summary, V1 strikes V2 on the right side in a T-type configuration which is consistent with the predicted trajectories.
+
+### Output Summary:
+```json
+{
+    'V1_traj': [(5, 2), (8, 2.5), (11, 2.0), (13, 2.0), (15, 2)],
+    'V2_traj': [(15, 4), (15, 3), (15, 2.5), (15, 2)],
+    'Validation': 'Pass'
+}
+```
+
+This output follows the analysis process and confirms that the predicted trajectories align with the incident description in the crash summary.

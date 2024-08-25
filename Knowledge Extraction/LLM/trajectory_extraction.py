@@ -141,7 +141,7 @@ def get_traj(trajectory_training_data,example_sketch,sketch,summary,road_attribu
     # save results
     file_name = f"{record}_trajectory.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def main():
@@ -149,7 +149,7 @@ def main():
     parser.add_argument('--data_path', default='E:\GitHub\CMIEA\Dataset', type=str, help='Path of MM crash dataset')
     parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str,
                         help='Path of road type label file')
-    parser.add_argument('--road_network', default='E:\GitHub\CMIEA\Knowledge Extraction\LLM\\road_network_extract_experiment_2024-08-25_13-57-52\\road_network_results.pkl', type=str,
+    parser.add_argument('--road_network', default='E:\GitHub\CMIEA\Knowledge Extraction\LLM\\road_network_extract_experiment_2024-08-25_17-25-00\\road_network_results.pkl', type=str,
                         help='Path of road type label file')
     parser.add_argument('--trajectory_training_data',
                         default="E:\GitHub\CMIEA\Knowledge Extraction\LLM\\trajectory_traing\\traffic_trajectory_0.pkl",

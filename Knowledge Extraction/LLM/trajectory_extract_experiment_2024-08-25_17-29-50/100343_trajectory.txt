@@ -1,0 +1,34 @@
+### Analysis and Process Steps
+
+1. **Road Type**: Straight
+2. **Mapping**:
+   - The road is already horizontally aligned, so we will keep it as is.
+   - Bottom-left corner of the road is set to (0, 0).
+   - The X-axis is established along the width of the road (in the horizontal direction).
+   - The Y-axis is established vertically.
+
+3. **Extract Starting Points and Collision Points**:
+   - **Vehicle V1**: 
+     - Starts in the right northbound lane (first lane). Estimated starting point: (4, 2).
+   - **Vehicle V2**:
+     - Starts in the left northbound lane (second lane), slightly behind V1. Estimated starting point: (10, 6).
+   - **Collision Point**: 
+     - The collision happens when V1 veers into the left lane of V2. Estimated collision point: (25, 6).
+
+4. **Predict Trajectories**:
+   - Trajectory for **V1**: Start at (4, 2), with intermediate points [(10, 3), (15, 4), (20, 5), and end at (25, 6)].
+   - Trajectory for **V2**: Start at (10, 6), with intermediate points [(13, 6), (18, 7), (21, 6), and end at (25, 6)].
+
+5. **Validation**:
+   - The predicted trajectories are consistent with the summary. V1 moves into V2's lane before the collision, confirming their interaction as described.
+
+### Output Summary
+```json
+{
+    "V1_traj": [(4, 2), (10, 3), (15, 4), (20, 5), (25, 6)],
+    "V2_traj": [(10, 6), (13, 6), (18, 7), (21, 6), (25, 6)],
+    "Validation": "Pass"
+}
+``` 
+
+This output reflects the deduced trajectories and confirms that they align with the accident's narrative as detailed in the crash summary.

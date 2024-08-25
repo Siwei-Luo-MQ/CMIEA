@@ -1,0 +1,41 @@
+Based on the provided sketch and summary, let's follow the analysis steps while adhering to the specified mapping and trajectory prediction rules for an intersection.
+
+### Analysis Steps
+
+1. **Determine Road Type**: The road type is an **Intersection**.
+
+2. **Mapping for Intersection**:
+   - **Center Point**: We will map the center of the intersection to (0, 0).
+   - **X-axis**: Establish along the horizontal direction with right as the positive direction.
+   - **Y-axis**: Establish along the vertical direction with upward as the positive direction.
+
+3. **Extract Start and Collision Points**:
+   - **Vehicle V1**: Traveling east (right lane), starting position estimated at (-20, 0) and colliding at (0, 10) in the intersection.
+   - **Vehicle V2**: Traveling north (left lane), starting position estimated at (0, -20) and colliding at (0, 10).
+
+4. **Determine Starting and Collision Points**:
+   - V1: Start at (-20, 0), collision at (0, 10).
+   - V2: Start at (0, -20), collision at (0, 10).
+
+5. **Predict Trajectories**:
+   - For **V1**: From (-20, 0) to (0, 10), approximate the intermediate points as follows:
+     - Intermediate points: (-15, 3), (-10, 6), (-5, 8).
+     - Complete trajectory: [(-20, 0), (-15, 3), (-10, 6), (-5, 8), (0, 10)].
+
+   - For **V2**: From (0, -20) to (0, 10), approximate as:
+     - Intermediate points: (0, -15), (0, -5), (0, 5).
+     - Complete trajectory: [(0, -20), (0, -15), (0, -5), (0, 5), (0, 10)].
+
+6. **Validation**: Compare predicted trajectories with crash summary:
+   - Based on the intersection dynamics described, both vehicles entered simultaneously and collided in a T-type configuration, which matches our predicted trajectories.
+
+### Output Summary
+```json
+{
+    'V1_traj': [(-20, 0), (-15, 3), (-10, 6), (-5, 8), (0, 10)],
+    'V2_traj': [(0, -20), (0, -15), (0, -5), (0, 5), (0, 10)],
+    'Validation': 'Pass'
+}
+```
+
+This structured output includes the predicted trajectories for both vehicles and confirms they align with the behaviors detailed in the crash summary.

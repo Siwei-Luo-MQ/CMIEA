@@ -1,0 +1,70 @@
+Let's break down the provided data and apply the mapping rules accordingly.
+
+### Step 1: Analyze Road Type
+
+- **Road Type**: T-intersection
+
+### Step 2: Mapping the Coordinate System
+
+1. **Map Center of the Intersection**: The intersection's center will be mapped to (0, 0).
+2. **Establish Axes**: 
+   - X-axis will go horizontally (right as positive).
+   - Y-axis will go vertically (upward as positive).
+
+### Step 3: Extract Starting and Collision Points
+
+From the sketch and summary:
+- **V1**: Traveling west in the westbound lane, we can assume a starting point to the left of V2 before the intersection. 
+- **V2**: Ahead of V1.
+- **V3**: Traveling east, positioned on the eastbound lane.
+
+**Deductions**:
+- **Starting Points**:
+  - V1: (-10, 2)
+  - V2: (-5, 2)
+  - V3: (5, 2)
+  
+- **Collision Point**: 
+  - V1 collides with V2's rear corner and then with V3's utility trailer: (-1, 2).
+
+### Step 4: Predicting Trajectories
+
+1. **V1 Prediction**: From (-10, 2) to (-1, 2).
+   - Intermediate points: 
+     - (-8, 2),
+     - (-5, 2),
+     - (-3, 2).
+
+   **V1 Trajectory**: [(-10, 2), (-8, 2), (-5, 2), (-3, 2), (-1, 2)]
+
+2. **V2 Prediction**: From (-5, 2) to (-1, 2).
+   - Intermediate points:
+     - (-4, 2),
+     - (-2, 2).
+
+   **V2 Trajectory**: [(-5, 2), (-4, 2), (-2, 2), (-1, 2)]
+
+3. **V3 Prediction**: From (5, 2) to (-1, 2).
+   - Intermediate points:
+     - (3, 2),
+     - (1, 2),
+     - (0, 2).
+  
+   **V3 Trajectory**: [(5, 2), (3, 2), (1, 2), (-1, 2)]
+
+### Step 5: Validation
+- Based on the summary, V1's movement towards V2 and then V3's trailer aligns with our predictions.
+
+### Final Output Summary
+```json
+{
+    'V1_traj': 
+    [(-10, 2), (-8, 2), (-5, 2), (-3, 2), (-1, 2)],
+    'V2_traj': 
+    [(-5, 2), (-4, 2), (-2, 2), (-1, 2)],
+    'V3_traj': 
+    [(5, 2), (3, 2), (1, 2), (-1, 2)],
+    'Validation': 'Pass'
+}
+```
+This output provides the predicted trajectories for each vehicle and a validation status based on the collision events described.
