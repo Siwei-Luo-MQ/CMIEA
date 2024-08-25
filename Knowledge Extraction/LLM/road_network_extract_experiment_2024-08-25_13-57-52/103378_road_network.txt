@@ -1,0 +1,24 @@
+Here¡¯s the extracted information based on the provided crash sketch and summary:
+
+1. **Number of ways at most for roads bordering the intersection**:  
+   Both roads are described as two-lane, two-way roads. Thus the maximum number of ways is 2.
+
+2. **Number of lanes at most for roads bordering the intersection**:  
+   Each road again has two lanes, leading to a maximum of 2 lanes.
+
+3. **Longest distance from one end of the intersection to the other**:  
+   To estimate the longest distance, we will consider the lengths represented in the sketch:  
+   - The length of the road in the southbound direction (horizontal) shows approximately 6 car lengths:  
+     \( 6 \times 5 = 30 \) meters.  
+   - The length of the road in the northbound direction (vertical) shows approximately 8 car lengths:  
+     \( 8 \times 5 = 40 \) meters.  
+   The longest distance is 40 meters.
+
+4. **Width of a single lane**:  
+   Based on common knowledge, the standard width of a single lane is approximately 4 meters.
+
+Now, formatting the output:
+
+```python
+{'No_ways': 2, 'No_lanes': 2, 'Length': 40, 'Width': 4}
+```

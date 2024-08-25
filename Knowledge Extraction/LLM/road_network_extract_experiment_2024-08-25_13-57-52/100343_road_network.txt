@@ -1,0 +1,16 @@
+Based on the provided sketch and summary, here are the extracted details:
+
+1. From the summary, it mentions "four-lane, divided freeway" which indicates that there are 2 ways (northbound and southbound) and 4 lanes in total (2 lanes in each direction).
+   
+   - **Number of ways**: 2
+   - **Number of lanes**: 4
+
+2. To estimate the length of the road, based on the sketch, we can approximate it using the length of the vehicle blocks (V1 and V2). The length of the road in the sketch appears to be about 10 car lengths (5 meters each). Hence, the calculation would be:
+   
+   - **Length of the road**: 5 meters x 10 = 50 meters
+
+3. The width of a single lane can be estimated by observing the space around the vehicles. Typically, a lane width is between 3.5 to 4 meters, so for this calculation, we'll assume a single lane width of 3.5 meters.
+
+Thus, the final output is:
+
+{'No_ways': 2, 'No_lanes': 4, 'Length': 50, 'Width': 3.5}

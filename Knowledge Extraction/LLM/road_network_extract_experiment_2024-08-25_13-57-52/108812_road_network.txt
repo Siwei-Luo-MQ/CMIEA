@@ -1,0 +1,10 @@
+Based on the provided sketch and crash summary, here are the extracted configuration details of the road network:
+
+1. **Number of ways**: 2 (as indicated by "two-lane, two-way")
+2. **Number of lanes**: 2 (as indicated by "two-lane")
+3. **Length of the road**: 50 meters (approximated from the sketch as 10 car lengths)
+4. **Width of a single lane**: 4 meters (calculated as the width of the car plus half on each side)
+5. **Curvature**: small (based on the description of the curve in comparison to the provided curvature examples)
+
+Formatted output:
+{'No_ways': 2, 'No_lanes': 2, 'Length': 50, 'Width': 4, 'Curvature': 'small'}

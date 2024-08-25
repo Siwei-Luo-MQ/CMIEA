@@ -1,0 +1,1 @@
+{'No_ways_main_road': 2, 'No_lanes_main_road': 2, 'No_ways_branch_road': 2, 'No_lanes_branch_road': 2, 'Length_main': 30, 'Length_branch': 10, 'Width': 3}
