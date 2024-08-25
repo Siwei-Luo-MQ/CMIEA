@@ -106,7 +106,7 @@ def straight_road_network(example_sketch,sketch,summary,record,folder_path,road_
     # save results
     file_name = f"{record}_road_network.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def curve_road_network(example_sketch,sketch,summary,record,folder_path,road_type,curvature):
@@ -199,7 +199,7 @@ def curve_road_network(example_sketch,sketch,summary,record,folder_path,road_typ
     # save results
     file_name = f"{record}_road_network.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def intersection_road_network(example_sketch,sketch,summary,record,folder_path,road_type):
@@ -278,7 +278,7 @@ def intersection_road_network(example_sketch,sketch,summary,record,folder_path,r
     # save results
     file_name = f"{record}_road_network.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def t_intersection_road_network(example_sketch,sketch,summary,record,folder_path,road_type):
@@ -356,7 +356,7 @@ def t_intersection_road_network(example_sketch,sketch,summary,record,folder_path
     # save results
     file_name = f"{record}_road_network.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def merge_road_network(example_sketch,sketch,summary,record,folder_path,road_type):
@@ -434,7 +434,7 @@ def merge_road_network(example_sketch,sketch,summary,record,folder_path,road_typ
     # save results
     file_name = f"{record}_road_network.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def main():

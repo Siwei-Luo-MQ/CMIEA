@@ -92,7 +92,7 @@ def road_type_extraction(sketch,summary,road_type_sketch,client,record,folder_pa
     # save results
     file_name = f"{record}_road_type.txt"
     file_path = os.path.join(folder_path, file_name)
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         file.write(first_output)
 
 def read_txt_results(folder_path,true_label):
