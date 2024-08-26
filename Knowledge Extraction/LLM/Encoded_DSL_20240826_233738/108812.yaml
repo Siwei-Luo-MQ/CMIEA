@@ -1,0 +1,43 @@
+Actors:
+  V1_traj:
+  - !!python/tuple
+    - 10
+    - 5
+  - !!python/tuple
+    - 15
+    - 5
+  - !!python/tuple
+    - 20
+    - 5
+  - !!python/tuple
+    - 22
+    - 5
+  - !!python/tuple
+    - 25
+    - 5
+  V2_traj:
+  - !!python/tuple
+    - 30
+    - 6
+  - !!python/tuple
+    - 28
+    - 5.5
+  - !!python/tuple
+    - 26
+    - 5.2
+  - !!python/tuple
+    - 25
+    - 5
+  Validation: Pass
+Env:
+  Car type: Truck
+  Time: Daytime
+  Weather: Cloudy
+Road network:
+  Curvature: small
+  Length: 50
+  No_lanes: 2
+  No_ways: 2
+  Width: 4
+Road type: Curve
+Scenario: '108812'

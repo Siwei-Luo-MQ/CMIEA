@@ -1,0 +1,32 @@
+Actors: []
+Environment:
+  Time: Daytime
+  Weather: Rainy
+Road_Network:
+  Length_branch: 0
+  Length_main: 30
+  No_lanes_branch_road: 2
+  No_lanes_main_road: 2
+  No_ways_branch_road: 2
+  No_ways_main_road: 2
+  Width: 3
+Scenario:
+  Actors:
+    NPC_actor_1:
+      Trajectory: null
+      Type: null
+    NPC_actor_2:
+      Trajectory: null
+      type: null
+  Environment:
+    Time: null
+    Weather: null
+  Road_network:
+    Length_branch: null
+    Length_main: null
+    No_lanes_branch_road: null
+    No_lanes_main_road: null
+    No_ways_branch_road: null
+    No_ways_main_road: null
+    Road_type: null
+    Width: null

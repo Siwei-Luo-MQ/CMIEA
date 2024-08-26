@@ -1,0 +1,64 @@
+Actors:
+- Trajectory:
+  - !!python/tuple
+    - 10
+    - -5
+  - !!python/tuple
+    - 12
+    - -4
+  - !!python/tuple
+    - 13
+    - -4.5
+  - !!python/tuple
+    - 14
+    - -4.8
+  - !!python/tuple
+    - 15
+    - -5
+  Type: Truck
+- Trajectory:
+  - !!python/tuple
+    - 15
+    - -3
+  - !!python/tuple
+    - 15
+    - -4
+  - !!python/tuple
+    - 15
+    - -4.5
+  - !!python/tuple
+    - 15
+    - -5
+  - !!python/tuple
+    - 15
+    - -5
+  Type: Truck
+Environment:
+  Time: Daytime
+  Weather: Rainy
+Road_Network:
+  Length_main: 60
+  Merge angle: small
+  No_lanes_branch_road: 1
+  No_lanes_main_road: 6
+  No_ways_main_road: 2
+  Width: 4
+Scenario:
+  Actors:
+    NPC_actor_1:
+      Trajectory: null
+      Type: null
+    NPC_actor_2:
+      Trajectory: null
+      type: null
+  Environment:
+    Time: null
+    Weather: null
+  Road_network:
+    Length_main: null
+    Merge_angle: null
+    No_lanes_branch_road: null
+    No_lanes_main_road: null
+    No_ways_main_road: null
+    Road_feature: null
+    Width: null

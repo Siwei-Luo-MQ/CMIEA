@@ -1,0 +1,45 @@
+Actors:
+  V1_traj:
+  - !!python/tuple
+    - 15
+    - 5
+  - !!python/tuple
+    - 18
+    - 5
+  - !!python/tuple
+    - 21
+    - 5
+  - !!python/tuple
+    - 23
+    - 5
+  - !!python/tuple
+    - 25
+    - 5
+  V2_traj:
+  - !!python/tuple
+    - 40
+    - 5
+  - !!python/tuple
+    - 35
+    - 5
+  - !!python/tuple
+    - 30
+    - 5
+  - !!python/tuple
+    - 27
+    - 5
+  - !!python/tuple
+    - 25
+    - 5
+  Validation: Pass
+Env:
+  Car type: Car
+  Time: Daytime
+  Weather: Sunny
+Road network:
+  Length: 60
+  No_lanes: 4
+  No_ways: 2
+  Width: 3
+Road type: Straight
+Scenario: '116194'

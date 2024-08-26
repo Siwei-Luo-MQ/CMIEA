@@ -1,0 +1,16 @@
+Actors:
+  Validation: Pass
+Env:
+  Car type: Car
+  Time: Daytime
+  Weather: Rainy
+Road network:
+  Length_branch: 0
+  Length_main: 30
+  No_lanes_branch_road: 2
+  No_lanes_main_road: 2
+  No_ways_branch_road: 2
+  No_ways_main_road: 2
+  Width: 3
+Road type: T-intersection
+Scenario: '105203'

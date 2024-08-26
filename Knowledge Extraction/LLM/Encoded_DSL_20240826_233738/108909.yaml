@@ -1,0 +1,47 @@
+Actors:
+  V1_traj:
+  - !!python/tuple
+    - 10
+    - -5
+  - !!python/tuple
+    - 12
+    - -4
+  - !!python/tuple
+    - 13
+    - -4.5
+  - !!python/tuple
+    - 14
+    - -4.8
+  - !!python/tuple
+    - 15
+    - -5
+  V2_traj:
+  - !!python/tuple
+    - 15
+    - -3
+  - !!python/tuple
+    - 15
+    - -4
+  - !!python/tuple
+    - 15
+    - -4.5
+  - !!python/tuple
+    - 15
+    - -5
+  - !!python/tuple
+    - 15
+    - -5
+  Validation: Pass
+Env:
+  Car type: Truck
+  Time: Daytime
+  Weather: Rainy
+Road network:
+  Length_main: 60
+  Merge angle: small
+  No_lanes_branch_road: 1
+  No_lanes_main_road: 6
+  No_ways_main_road: 2
+  Width: 4
+Road type: Merge
+Scenario: '108909'

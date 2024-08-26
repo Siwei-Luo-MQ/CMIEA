@@ -1,0 +1,60 @@
+Actors:
+- Trajectory:
+  - !!python/tuple
+    - 15
+    - 5
+  - !!python/tuple
+    - 18
+    - 5
+  - !!python/tuple
+    - 21
+    - 5
+  - !!python/tuple
+    - 23
+    - 5
+  - !!python/tuple
+    - 25
+    - 5
+  Type: Car
+- Trajectory:
+  - !!python/tuple
+    - 40
+    - 5
+  - !!python/tuple
+    - 35
+    - 5
+  - !!python/tuple
+    - 30
+    - 5
+  - !!python/tuple
+    - 27
+    - 5
+  - !!python/tuple
+    - 25
+    - 5
+  Type: Car
+Environment:
+  Time: Daytime
+  Weather: Sunny
+Road_Network:
+  Length: 60
+  No_lanes: 4
+  No_ways: 2
+  Width: 3
+Scenario:
+  Actors:
+    NPC_actor_1:
+      Trajectory: null
+      Type: null
+    NPC_actor_2:
+      Trajectory: null
+      type: null
+  Environment:
+    Time: null
+    Weather: null
+  Road_network:
+    Length: null
+    No_lanes: null
+    No_ways: null
+    Road_type: null
+    Width: null

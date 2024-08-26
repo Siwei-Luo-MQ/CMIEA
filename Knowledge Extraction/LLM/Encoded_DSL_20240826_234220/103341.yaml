@@ -1,0 +1,17 @@
+Actors:
+  V1_traj: '[(15, 3), (20, 3), (25, 3), (28, 3), (30, 3)]'
+  V2_traj: '[(20, 3), (22, 3.5), (25, 3), (28, 2.5), (30, 3)]'
+  Validation: Pass
+Env:
+  Car type: Car
+  Time: Daytime
+  Weather: Rainy
+Road network:
+  Length_main: 60
+  Merge angle: small
+  No_lanes_branch_road: 2
+  No_lanes_main_road: 6
+  No_ways_main_road: 2
+  Width: 4
+Road type: Merge
+Scenario: '103341'

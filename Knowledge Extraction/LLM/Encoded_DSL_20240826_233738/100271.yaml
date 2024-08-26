@@ -1,0 +1,42 @@
+Actors:
+  V1_traj:
+  - !!python/tuple
+    - -10
+    - 1
+  - !!python/tuple
+    - -5
+    - 0.5
+  - !!python/tuple
+    - -2
+    - 0
+  - !!python/tuple
+    - 0
+    - 0
+  V2_traj:
+  - !!python/tuple
+    - 5
+    - -5
+  - !!python/tuple
+    - 3
+    - -3
+  - !!python/tuple
+    - 1
+    - -2
+  - !!python/tuple
+    - 0
+    - 0
+  Validation: Pass
+Env:
+  Car type: Car
+  Time: Daytime
+  Weather: Sunny
+Road network:
+  Length_branch: 10
+  Length_main: 45
+  No_lanes_branch_road: 3
+  No_lanes_main_road: 3
+  No_ways_branch_road: 2
+  No_ways_main_road: 2
+  Width: 4
+Road type: T-intersection
+Scenario: '100271'
