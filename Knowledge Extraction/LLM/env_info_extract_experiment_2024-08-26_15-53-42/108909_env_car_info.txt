@@ -1,0 +1,1 @@
+{'Weather': 'Rainy', 'Time': 'Daytime', 'Car type': 'Truck'}

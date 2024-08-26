@@ -1,0 +1,17 @@
+Scenario:
+  Environment:
+    Weather:
+    Time:
+  Road_network:
+    Road_type:
+    No_ways:
+    No_lanes:
+    Length:
+    Width:
+  Actors:
+    NPC_actor_1:
+      Type:
+      Trajectory:
+    NPC_actor_2:
+      type:
+      Trajectory:

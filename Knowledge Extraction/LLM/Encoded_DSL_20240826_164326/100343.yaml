@@ -1,0 +1,24 @@
+Actors: []
+Environment:
+  Time: ''
+  Weather: ''
+Road_Network: {}
+Scenario:
+  Actors:
+    NPC_actor_1:
+      Trajectory: null
+      Type: null
+    NPC_actor_2:
+      Trajectory: null
+      type: null
+  Environment:
+    Time: null
+    Weather: null
+  Road_network:
+    Length_main: null
+    Merge_angle: null
+    No_lanes_branch_road: null
+    No_lanes_main_road: null
+    No_ways_main_road: null
+    Road_feature: null
+    Width: null

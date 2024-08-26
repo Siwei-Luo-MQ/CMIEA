@@ -1,0 +1,19 @@
+Scenario:
+  Environment:
+    Weather:
+    Time:
+  Road_network:
+    Road_feature:
+    No_ways_main_road:
+    No_lanes_main_road:
+    No_lanes_branch_road:
+    Length_main:
+    Width:
+    Merge_angle:
+  Actors:
+    NPC_actor_1:
+      Type:
+      Trajectory:
+    NPC_actor_2:
+      type:
+      Trajectory:
