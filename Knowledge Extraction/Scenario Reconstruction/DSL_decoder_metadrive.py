@@ -11,6 +11,9 @@ import argparse
 import os
 import yaml
 import time
+import math
+
+import metadrive
 
 def convert_string_to_list_of_lists(string):
     # 去掉字符串中的方括号
@@ -20,6 +23,24 @@ def convert_string_to_list_of_lists(string):
     # 将元组转换为列表
     list_of_lists = [list(item) for item in list_of_tuples]
     return list_of_lists
+
+
+def calculate_azimuth_angle(coordinates):
+    # 提取最前面的两个点形成向量
+    p1, p2 = coordinates[0], coordinates[1]
+
+    # 计算向量的分量
+    vector_x = p2[0] - p1[0]
+    vector_y = p2[1] - p1[1]
+
+    # 计算方位角（弧度制）
+    azimuth_angle = math.atan2(vector_y, vector_x)
+
+    # 将方位角调整为 [0, 2π] 的范围
+    if azimuth_angle < 0:
+        azimuth_angle += 2 * math.pi
+
+    return azimuth_angle
 
 
 def determine_heading(points):
@@ -54,7 +75,7 @@ def run_straight(road_network,env_info,actors,ID):
         if len(test) == 2:
             traj_list.append(convert_string_to_list_of_lists(value))
     No_actors = len(traj_list)
-    ego_headings = determine_heading(traj_list[0])
+    ego_headings = calculate_azimuth_angle(traj_list[0])
     ego_start_point = traj_list[0][0]
 
     scenario_config = {'map_config': {'type': 'block_sequence',
@@ -88,7 +109,7 @@ def run_straight(road_network,env_info,actors,ID):
         npc = env.engine.spawn_object(DefaultVehicle,
                                       vehicle_config=cfg,
                                       position=traj_list[1][0],
-                                      heading=determine_heading(traj_list[1]))
+                                      heading=calculate_azimuth_angle(traj_list[1]))
 
         env.engine.add_policy(npc.id, TrajectoryIDMPolicy, npc, env.engine.generate_seed(), npc_traj)
         env.engine.add_policy(env.agent.id, TrajectoryIDMPolicy, env.agent, env.engine.generate_seed(), ego_traj)
@@ -130,9 +151,71 @@ def run_intersection(road_network,env_info,actors,ID):
         if len(test) == 2:
             traj_list.append(convert_string_to_list_of_lists(value))
     No_actors = len(traj_list)
-    ego_headings = determine_heading(traj_list[0])
+
+    ego_headings = calculate_azimuth_angle(traj_list[0])
     ego_start_point = traj_list[0][0]
 
+    start_position = [int(road_network['Length']/2),int((road_network['No_lanes'] / 2)*road_network['Width'])]
+
+    print('---------------')
+    print(start_position)
+    print('---------------')
+
+
+    scenario_config = {'map_config': {'type': 'block_sequence',
+                                      'config': 'X',
+                                      'lane_width': road_network['Width'],
+                                      'lane_num': int(road_network['No_lanes'] / 2),
+                                      'exit_length': road_network['Length']/2,
+                                      # 'start_position': [0,0]
+                                      },
+                       'traffic_density': 0,
+                       'vehicle_config': {
+                           'spawn_position_heading': [ego_start_point, ego_headings],
+                       },
+                       'use_render': True,
+                       'daytime': day_time,
+                       "truncate_as_terminate": True,
+                       "crash_vehicle_done": True,
+                       }
+
+    env = MetaDriveEnv(scenario_config)
+    frames = []
+
+    ego_traj = get_idm_route(traj_list[0])
+    npc_traj = get_idm_route(traj_list[1])
+
+    try:
+        env.reset()
+        cfg = env.config["vehicle_config"]
+        cfg["navigation"] = None  # it doesn't need navigation system
+
+        npc = env.engine.spawn_object(DefaultVehicle,
+                                      vehicle_config=cfg,
+                                      position=traj_list[1][0],
+                                      heading=calculate_azimuth_angle(traj_list[1]))
+
+        env.engine.add_policy(npc.id, TrajectoryIDMPolicy, npc, env.engine.generate_seed(), npc_traj)
+        env.engine.add_policy(env.agent.id, TrajectoryIDMPolicy, env.agent, env.engine.generate_seed(), ego_traj)
+
+        for _ in range(100):
+            p = env.engine.get_policy(npc.name)
+            npc.before_step(p.act(True))
+            _, r, _, _, info = env.step([0, 0])
+            frame = env.render(mode="topdown",
+                               window=False,
+                               screen_size=(800, 400),
+                               draw_target_vehicle_trajectory=False,
+                               scaling=4,
+                               camera_position=(10, 0))
+            frames.append(frame)
+            if info['crash']:
+                break
+        generate_gif(frames, gif_name=f"{ID}.gif")
+    finally:
+        env.close()
+
+    time.sleep(2)
 
 def run_T_intersection():
     pass
@@ -172,7 +255,8 @@ def main():
         road_network = DSL['Road network']
         road_type = DSL['Road type']
         if road_type == 'Straight':
-            run_straight(road_network,env_info,actors,ID)
+            pass
+            # run_straight(road_network,env_info,actors,ID)
         elif road_type == 'Intersection':
             run_intersection(road_network,env_info,actors,ID)
         elif road_type == 'T-intersection':
