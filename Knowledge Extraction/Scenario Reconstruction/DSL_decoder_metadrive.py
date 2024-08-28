@@ -10,26 +10,129 @@ from metadrive.scenario.parse_object_state import parse_object_state, get_idm_ro
 import argparse
 import os
 import yaml
+import time
 
-def run_straight():
+def convert_string_to_list_of_lists(string):
+    # 去掉字符串中的方括号
+    string = string.strip('[]')
+    # 使用 eval 函数将字符串转换为列表元组
+    list_of_tuples = eval(string)
+    # 将元组转换为列表
+    list_of_lists = [list(item) for item in list_of_tuples]
+    return list_of_lists
+
+
+def determine_heading(points):
+    # 判断列表是否有足够的点
+    if len(points) < 2:
+        raise ValueError("至少需要两个点来判断车头朝向")
+
+    # 计算第一个和第二个点的X坐标差值
+    x_difference = points[1][0] - points[0][0]
+
+    # 根据差值判断朝向
+    if x_difference > 0:
+        return 0  # 车头朝右
+    else:
+        return 3.14  # 车头朝左
+
+
+def run_straight(road_network,env_info,actors,ID):
+    # MetaDrive doesn't have a set of weather system
+    # Get daytime
+    day_time = env_info['Time']
+    if day_time == 'Daytime':
+        day_time = '11:00'
+    elif day_time == 'Nighttime':
+        day_time = '19:00'
+
+    # Get the first car from Actors and set it as ego car
+    # Get car list
+    traj_list = []
+    for key, value in actors.items():
+        test = str(key).split('_')
+        if len(test) == 2:
+            traj_list.append(convert_string_to_list_of_lists(value))
+    No_actors = len(traj_list)
+    ego_headings = determine_heading(traj_list[0])
+    ego_start_point = traj_list[0][0]
+
     scenario_config = {'map_config': {'type': 'block_sequence',
                                       'config': 'S',
-                                      'lane_width': 3,
-                                      'lane_num': 1,
-                                      'start_position': [0, 0],
+                                      'lane_width': road_network['Width'],
+                                      'lane_num': int(road_network['No_lanes']/2),
+                                      'exit_length': road_network['Length'],
+                                      'start_position': [0, 0]
                                       },
                        'traffic_density': 0,
                        'vehicle_config': {
-                           'spawn_position_heading': [[0, 0], 0],
+                           'spawn_position_heading': [ego_start_point, ego_headings],
                        },
                        'use_render': True,
+                       'daytime': day_time,
                        "truncate_as_terminate": True,
                        "crash_vehicle_done": True,
                        }
-    pass
 
-def run_intersection():
-    pass
+    env = MetaDriveEnv(scenario_config)
+    frames = []
+
+    ego_traj = get_idm_route(traj_list[0])
+    npc_traj = get_idm_route(traj_list[1])
+
+    try:
+        env.reset()
+        cfg = env.config["vehicle_config"]
+        cfg["navigation"] = None  # it doesn't need navigation system
+
+        npc = env.engine.spawn_object(DefaultVehicle,
+                                      vehicle_config=cfg,
+                                      position=traj_list[1][0],
+                                      heading=determine_heading(traj_list[1]))
+
+        env.engine.add_policy(npc.id, TrajectoryIDMPolicy, npc, env.engine.generate_seed(), npc_traj)
+        env.engine.add_policy(env.agent.id, TrajectoryIDMPolicy, env.agent, env.engine.generate_seed(), ego_traj)
+
+        for _ in range(100):
+            p = env.engine.get_policy(npc.name)
+            npc.before_step(p.act(True))
+            _, r, _, _, info = env.step([0, 0])
+            frame = env.render(mode="topdown",
+                               window=False,
+                               screen_size=(800, 400),
+                               draw_target_vehicle_trajectory=False,
+                               scaling=4,
+                               camera_position=(10, 0))
+            frames.append(frame)
+            if info['crash']:
+                break
+        generate_gif(frames, gif_name=f"{ID}.gif")
+    finally:
+        env.close()
+
+    time.sleep(2)
+
+
+def run_intersection(road_network,env_info,actors,ID):
+    # MetaDrive doesn't have a set of weather system
+    # Get daytime
+    day_time = env_info['Time']
+    if day_time == 'Daytime':
+        day_time = '11:00'
+    elif day_time == 'Nighttime':
+        day_time = '19:00'
+
+    # Get the first car from Actors and set it as ego car
+    # Get car list
+    traj_list = []
+    for key, value in actors.items():
+        test = str(key).split('_')
+        if len(test) == 2:
+            traj_list.append(convert_string_to_list_of_lists(value))
+    No_actors = len(traj_list)
+    ego_headings = determine_heading(traj_list[0])
+    ego_start_point = traj_list[0][0]
+
 
 def run_T_intersection():
     pass
@@ -56,24 +159,22 @@ def load_yaml_files_to_dict(directory_path):
 
 def main():
     parser = argparse.ArgumentParser(description='MM ADS Testing - road type extraction')
-    parser.add_argument('--dsl_path', default=r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\LLM\Encoded_DSL_20240826_234220', type=str)
+    parser.add_argument('--dsl_path', default=r'E:\GitHub\CMIEA\Knowledge Extraction\LLM\Encoded_DSL_20240826_234220', type=str)
     args = parser.parse_args()
 
-    directory_path = args.dsl_path  # 将这里替换为实际的路径
+    directory_path = args.dsl_path
     yaml_data = load_yaml_files_to_dict(directory_path)
-
-    print(yaml_data['100237'])
 
     # loop over all the cases
     for ID, DSL in yaml_data.items():
         actors = DSL['Actors']
-        env = DSL['Env']
+        env_info = DSL['Env']
         road_network = DSL['Road network']
         road_type = DSL['Road type']
         if road_type == 'Straight':
-            run_straight()
+            run_straight(road_network,env_info,actors,ID)
         elif road_type == 'Intersection':
-            run_intersection()
+            run_intersection(road_network,env_info,actors,ID)
         elif road_type == 'T-intersection':
             run_T_intersection()
         elif road_type == 'Curve':
