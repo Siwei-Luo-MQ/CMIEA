@@ -1,0 +1,31 @@
+Based on the provided crash sketch and summary, here are the extracted configuration details of the road network:
+
+1. The main road has vehicles V1 and V2 traveling west, indicating that it is a two-lane, two-way road.
+   - No_ways_main_road: 2
+   - No_lanes_main_road: 2
+
+2. The branch road, in this case, is defined as the opposing eastbound lane where vehicle V3 is traveling.
+   - No_ways_branch_road: 2
+   - No_lanes_branch_road: 2
+
+3. To approximate the lengths and width from the sketch:
+   - For the main road length (westbound), V2 is ahead of V1 in their lane. The length appears to be around 6 car lengths. Therefore, the length of the main road would be about:
+     length_main_road = 5 * 6 = 30 meters.
+   
+   - For the branch road length (eastbound), V3 appears to take up about 3 car lengths' worth of space in the lane, indicating the length would be:
+     length_branch_road = 5 * 3 = 15 meters.
+   
+   - The width of a lane can be estimated by observing that a car (width = 2 meters) has some space on either side. The total lane width can be approximated as:
+     Width = 2 + (2/2) + (2/2) = 4 meters.
+
+Now formatting the output:
+
+{
+  'No_ways_main_road': 2,
+  'No_lanes_main_road': 2,
+  'No_ways_branch_road': 2,
+  'No_lanes_branch_road': 2,
+  'Length_main': 30,
+  'Length_branch': 15,
+  'Width': 4
+}

@@ -146,13 +146,13 @@ def get_traj(trajectory_training_data,example_sketch,sketch,summary,road_attribu
 
 def main():
     parser = argparse.ArgumentParser(description='MM ADS Testing - road network extraction')
-    parser.add_argument('--data_path', default='E:\GitHub\CMIEA\Dataset', type=str, help='Path of MM crash dataset')
-    parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str,
+    parser.add_argument('--data_path', default=r'C:\Users\Kris\Desktop\CMIEA\Dataset', type=str, help='Path of MM crash dataset')
+    parser.add_argument('--road_type_label', default=r'C:\Users\Kris\Desktop\CMIEA\road_type.xlsx', type=str,
                         help='Path of road type label file')
-    parser.add_argument('--road_network', default='E:\GitHub\CMIEA\Knowledge Extraction\LLM\\road_network_extract_experiment_2024-08-25_17-25-00\\road_network_results.pkl', type=str,
+    parser.add_argument('--road_network', default=r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\LLM\road_network_extract_experiment_2024-08-29_13-19-28\road_network_results.pkl', type=str,
                         help='Path of road type label file')
     parser.add_argument('--trajectory_training_data',
-                        default="E:\GitHub\CMIEA\Knowledge Extraction\LLM\\trajectory_traing\\traffic_trajectory_0.pkl",
+                        default=r"C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\LLM\trajectory_traing\traffic_trajectory_0.pkl",
                         type=str,
                         help='Path of pracjectory training data folder')
 
@@ -197,7 +197,7 @@ def main():
         road_attribute =road_network[record]
         road_attribute['Road type'] = road_type
 
-        example_sketch = encode_image('E:\GitHub\CMIEA\Knowledge Extraction\LLM\sketch_example_1.jpg')
+        example_sketch = encode_image(r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\LLM\sketch_example_1.jpg')
         # Get trajectory from GPT
         get_traj(trajectory_training_data,example_sketch,sketch,summary,road_attribute,record,folder_path)
         print(f'Record: {record} finished!')

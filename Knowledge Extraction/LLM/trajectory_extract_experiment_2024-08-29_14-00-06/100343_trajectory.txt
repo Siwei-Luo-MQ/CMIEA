@@ -1,0 +1,43 @@
+Based on the provided sketch, summary, and road network information, here’s the step-by-step process for the trajectory extraction, prediction, and validation:
+
+### Step 1: Road Characteristics
+- **Road Type**: Straight
+- **Alignment**: The provided sketch indicates that the road is already horizontal, so no rotation is necessary.
+- **Mapping**: The bottom-left corner of the roadway is set to (0, 0). We establish:
+  - X-axis: horizontal (positive to the right)
+  - Y-axis: vertical (positive upwards)
+
+### Step 2: Extract Starting Points and Collision Points
+From the sketch and the summary:
+- **Vehicle 1 (V1)**: 
+  - Starting Point: In the right northbound lane, estimated coordinates might be (6, 2)
+  - Collision Point: In the left lane where the collision occurs, estimated coordinates might be (25, 6)
+  
+- **Vehicle 2 (V2)**:
+  - Starting Point: In the left northbound lane, behind V1, estimated coordinates might be (10, 6)
+  - Collision Point: Same as V1, (25, 6)
+
+### Step 3: Predicted Trajectories
+Using the starting and collision points, let's predict the trajectories with intermediate points:
+- **V1 Trajectory**: 
+  - From (6, 2) to (25, 6)
+  - Intermediate points could be: [(10, 3), (15, 4), (20, 5)]
+  
+- **V2 Trajectory**: 
+  - From (10, 6) to (25, 6)
+  - Intermediate points could be: [(15, 6), (20, 6), (25, 6)]
+
+### Step 4: Validate Predicted Trajectories
+Based on the summary, V1 veered into V2's lane, and the collision happened in the left lane where both vehicles ended up:
+- The trajectory predictions align with the vehicles’ described movements.
+
+### Final Output Summary
+```json
+{
+    'V1_traj': [(6, 2), (10, 3), (15, 4), (20, 5), (25, 6)],
+    'V2_traj': [(10, 6), (15, 6), (20, 6), (25, 6)],
+    'Validation': 'Pass'
+}
+```
+
+This output includes the predicted trajectories for both vehicles and confirms that the trajectory behavior matches the description in the crash summary.

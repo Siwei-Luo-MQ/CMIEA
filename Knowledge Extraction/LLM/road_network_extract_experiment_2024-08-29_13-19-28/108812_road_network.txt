@@ -1,0 +1,1 @@
+{'No_ways': 2, 'No_lanes': 2, 'Length': 50, 'Width': 4, 'Curvature': 'small'}

@@ -112,8 +112,8 @@ def read_txt_results(folder_path,true_label):
 
 def main():
     parser = argparse.ArgumentParser(description='MM ADS Testing - road type extraction')
-    parser.add_argument('--data_path',default='E:\GitHub\CMIEA\Dataset',type=str,help='Path of MM crash dataset')
-    parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str, help='Path of road type label file')
+    parser.add_argument('--data_path',default=r'C:\Users\Kris\Desktop\CMIEA\Dataset',type=str,help='Path of MM crash dataset')
+    parser.add_argument('--road_type_label', default=r'C:\Users\Kris\Desktop\CMIEA\road_type.xlsx', type=str, help='Path of road type label file')
     args=parser.parse_args()
 
     # Get data ID list
@@ -140,7 +140,7 @@ def main():
         # Information Extraction Stage - Step 1
         # Extract road type from Summary and Validate using sketch
         # Get training sketch
-        road_type_sketch = encode_image('E:\GitHub\CMIEA\Prompt Engineering\\road_type\Sketch.jpg')
+        road_type_sketch = encode_image(r'C:\Users\Kris\Desktop\CMIEA\Prompt Engineering\road_type\Sketch.jpg')
         road_type_extraction(sketch,
                              summary,
                              road_type_sketch,

@@ -1,0 +1,49 @@
+Let's tackle the case step by step, following the provided instructions and mapping guidelines for an intersection.
+
+### Analysis Steps
+
+1. **Road Type**: **Intersection**
+2. **Mapping**:
+   - We'll map the center of the intersection to (0, 0).
+   - The X-axis will go horizontally (right as the positive direction).
+   - The Y-axis will go vertically (upward as the positive direction).
+
+3. **Extract Starting and Collision Points**:
+   - Based on the sketch and the summary, V1 is traveling east and V2 is traveling north.
+   - V1 strikes the right side of V2 in a T-type collision configuration at the intersection.
+
+### Determining Points
+- V1 (eastbound):
+  - Start point (before the intersection): Let's set it at (-10, 0).
+  - Collision point (at the intersection): Set it at (0, 0).
+
+- V2 (northbound):
+  - Start point (before the intersection): Set it at (0, 10).
+  - Collision point (at the intersection): Also at (0, 0).
+
+### Predicting Trajectories
+We'll interpolate the trajectories with intermediate points based on the linear paths of the vehicles:
+- **V1 trajectory**:
+  - Starting at (-10, 0).
+  - Intermediate points could be (-5, 0), (-2, 0), (-1, 0), and arriving at (0, 0).
+
+- **V2 trajectory**:
+  - Starting at (0, 10).
+  - Intermediate points could be (0, 7), (0, 5), (0, 2), and arriving at (0, 0).
+
+### Final Outputs
+
+The predicted trajectories for both vehicles and validation would look like this:
+
+```json
+{
+    'V1_traj': [(-10, 0), (-5, 0), (-2, 0), (-1, 0), (0, 0)],
+    'V2_traj': [(0, 10), (0, 7), (0, 5), (0, 2), (0, 0)],
+    'Validation': 'Pass'
+}
+```
+
+In this output:
+- **V1_traj**: Displays points of V1 moving east towards the intersection and colliding with V2.
+- **V2_traj**: Displays points of V2 moving north toward the intersection before the collision.
+- **Validation**: Indicates that the predicted trajectories align with the summary's description of the vehicles' behaviors during the accident.

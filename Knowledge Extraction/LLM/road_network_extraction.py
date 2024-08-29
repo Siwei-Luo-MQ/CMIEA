@@ -534,8 +534,8 @@ def merge_road_network(example_sketch,sketch,summary,record,folder_path,road_typ
 
 def main():
     parser = argparse.ArgumentParser(description='MM ADS Testing - road network extraction')
-    parser.add_argument('--data_path', default='E:\GitHub\CMIEA\Dataset', type=str, help='Path of MM crash dataset')
-    parser.add_argument('--road_type_label', default='E:\GitHub\CMIEA\\road_type.xlsx', type=str,
+    parser.add_argument('--data_path', default=r'C:\Users\Kris\Desktop\CMIEA\Dataset', type=str, help='Path of MM crash dataset')
+    parser.add_argument('--road_type_label', default=r'C:\Users\Kris\Desktop\CMIEA\road_type.xlsx', type=str,
                         help='Path of road type label file')
     args = parser.parse_args()
 
@@ -563,7 +563,7 @@ def main():
         # Extract road network from Summary and sketch
         if road_type_labels[record_id] == 'Straight':
             example_sketch = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\Straight\Sketch.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\Straight\Sketch.jpg')
             straight_road_network(example_sketch,
                                   sketch,
                                   summary,
@@ -572,9 +572,9 @@ def main():
                                   road_type_labels[record_id])
         elif road_type_labels[record_id] == 'Curve':
             example_sketch = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\Curve\Sketch.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\Curve\Sketch.jpg')
             curvature = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\Curve\curvature.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\Curve\curvature.jpg')
             curve_road_network(example_sketch,
                                   sketch,
                                   summary,
@@ -585,7 +585,7 @@ def main():
                                )
         elif road_type_labels[record_id] == 'Intersection':
             example_sketch = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\Intersection\Sketch.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\Intersection\Sketch.jpg')
             intersection_road_network(example_sketch,
                                   sketch,
                                   summary,
@@ -594,7 +594,7 @@ def main():
                                   road_type_labels[record_id])
         elif road_type_labels[record_id] == 'T-intersection':
             example_sketch = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\T-Intersection\Sketch.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\T-Intersection\Sketch.jpg')
             t_intersection_road_network(example_sketch,
                                       sketch,
                                       summary,
@@ -603,7 +603,7 @@ def main():
                                       road_type_labels[record_id])
         elif road_type_labels[record_id] == 'Merge':
             example_sketch = encode_image(
-                'E:\GitHub\CMIEA\Knowledge Extraction\Road Attribute Extraction\Merge\Sketch.jpg')
+                r'C:\Users\Kris\Desktop\CMIEA\Knowledge Extraction\Road Attribute Extraction\Merge\Sketch.jpg')
             merge_road_network(example_sketch,
                                         sketch,
                                         summary,
